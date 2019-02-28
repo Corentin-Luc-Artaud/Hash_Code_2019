@@ -31,7 +31,6 @@ public class Image {
    public String[] getTags() {
        return tags;
    }
-
    @Override
    public String toString(){
        StringBuilder stringBuilder = new StringBuilder();

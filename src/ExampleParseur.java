@@ -41,10 +41,12 @@ public class ExampleParseur {
                 }
                 Image image = new Image(index,photoParameters[0],photosTags);
 
-                if(image.getOrientation().equals("H"))
+                if(image.getOrientation().equals("H")) {
                     imageListH.add(image);
-                else
+                }
+                else {
                     imageListV.add(image);
+                }
                 System.out.println(image);
                 index++;
             }
