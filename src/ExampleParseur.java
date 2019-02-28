@@ -5,14 +5,13 @@ import java.util.Scanner;
 
 public class ExampleParseur {
 
-    static int numberOfPhotos;
+    private static int numberOfPhotos;
     private static ArrayList<Image> imageList;
 
-    public static void main(String[] args) {
-        String file1 = args[0];
+    public ExampleParseur(String path){
         imageList = new ArrayList<>();
         try {
-            readFile(file1);
+            readFile(path);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,5 +58,13 @@ public class ExampleParseur {
 
     private static void setData(String line) {
        numberOfPhotos = Integer.parseInt(line);
+    }
+
+    public int getNumberOfPhotos() {
+        return numberOfPhotos;
+    }
+
+    public ArrayList<Image> getImageList() {
+        return imageList;
     }
 }
