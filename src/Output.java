@@ -5,12 +5,13 @@ import java.util.List;
 
 public class Output {
     private int number_slides;
-    private String fileName = "test";
+    private String fileName;
     private List<Slide> slides;
 
-    public Output(int number_slides, List<Slide> slideList) {
+    public Output(int number_slides, List<Slide> slideList,String filename ) {
         this.number_slides = number_slides;
         this.slides = slideList;
+        this.fileName = filename;
         printOutput();
     }
 
@@ -35,12 +36,11 @@ public class Output {
                 //Slide side = pizzaCutter.cutSlices.get(j);
                 // Get tags and orientation
                 Slide slide = slides.get(j);
-                writer.print(slide.toString()+'\n');
+                writer.print(slide.toString()+(j < number_slides-1?'\n': ""));
             }
 
 
             //writer.print(cutSlice.startX + " " + cutSlice.startY + " " + cutSlice.endX + " " + cutSlice.endY);
-            writer.println();
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
         } catch (UnsupportedEncodingException e1) {

@@ -15,22 +15,6 @@ public class Slide {
             if (i > 0 && ! allowMulti) throw new RuntimeException("bad Images list -> "+images);
         }
     }
-    public String possibility(){
-        if(images.size()==0){
-            return "HV";
-        }
-        else if(images.size()==1) {
-            if(images.get(0).getOrientation().equals("V")){
-                return "V";
-            }
-            else{
-                return "";
-            }
-        }
-        else{
-            return "";
-        }
-    }
     /**
      * @return the images
      */

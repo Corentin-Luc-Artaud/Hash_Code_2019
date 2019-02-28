@@ -45,6 +45,7 @@ public class ExampleParseur {
                     imageListH.add(image);
                 else
                     imageListV.add(image);
+                System.out.println(image);
                 index++;
             }
             // note that Scanner suppresses exceptions

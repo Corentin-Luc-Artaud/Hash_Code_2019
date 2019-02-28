@@ -3,11 +3,11 @@ import java.util.List;
 
 public class Runner {
 
-    public static ArrayList<Image> imageListV;
-    public static ArrayList<Image> imageListH;
+    public static List<Image> imageListV;
+    public static List<Image> imageListH;
 
-    private static ArrayList<Slide> slides;
-    private static ArrayList<Slide> OfficialySlides;
+    private static List<Slide> slides = new ArrayList<>();
+    private static List<Slide> OfficialySlides;
 
 
     public static void main(String... args){
@@ -21,35 +21,44 @@ public class Runner {
             allFiles[4] = "inputs/e_shiny_selfies.txt";
             for(String file : allFiles){
                 ExampleParseur exampleParseur = new ExampleParseur(file);
-                RandomAlgo randomAlgo = new RandomAlgo(exampleParseur.getImageList(),new ArrayList<>());
+                imageListH = exampleParseur.getImageListH();
+                imageListV = exampleParseur.getImageListV();
+                RandomAlgo randomAlgo = new RandomAlgo(slides);
+                creationSlide();
                 List<Slide> result = randomAlgo.process();
-
+                new Output(result.size(),result,file);
             }
         }
         else {
             ExampleParseur exampleParseur = new ExampleParseur(args[0]);
-            RandomAlgo randomAlgo = new RandomAlgo(exampleParseur.getImageList(), new ArrayList<>());
+            imageListH = exampleParseur.getImageListH();
+            imageListV = exampleParseur.getImageListV();
+            creationSlide();
+            RandomAlgo randomAlgo = new RandomAlgo(slides);
             List<Slide> result = randomAlgo.process();
-            new Output(result.size(),result);
+           // new Output(result.size(),result,args[0].split("/")[1]);
         }
-        ExampleParseur exampleParseur = new ExampleParseur(args[0]);
-        imageListH = exampleParseur.getImageListH();
-        imageListV = exampleParseur.getImageListV();
-        creationSlide();
+
     }
 
     static void creationSlide(){
-        for(int i=0; i<imageListV.size()-1; i+=2){
+        int length = imageListV.size()-1;
+        if(imageListV.size()%2==0){
+            length = imageListV.size();
+        }
+        for(int i=0; i<length; i+=2){
             Image[] images = new Image[2];
             images[0] = imageListV.get(i);
             images[1] = imageListV.get(i+1);
-
-            slides.add(new Slide(images));
+            Slide slide = new Slide();
+            slide.add(images[0]);
+            slide.add(images[1]);
+            slides.add(slide);
         }
         for(Image image : imageListH){
-            Image[] images = new Image[1];
-            images[0] = image;
-            slides.add(new Slide(images));
+            Slide slide = new Slide();
+            slide.add(image);
+            slides.add(slide);
         }
     }
 
