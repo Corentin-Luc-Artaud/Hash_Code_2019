@@ -1,11 +1,11 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Runner {
 
-    public static List<Image> imageListV;
+    public static List<Image> imageListV = new ArrayList<>();
     public static List<Image> imageListH;
+
+    public static TagDictionnary tagDictionnary = new TagDictionnary();
 
     private static List<Slide> slides = new ArrayList<>();
     private static List<Slide> OfficialySlides;
@@ -49,7 +49,33 @@ public class Runner {
             length = imageListV.size();
         }
         Collections.shuffle(imageListV);
-        for(int i=0; i<length-1; i+=2){
+        tagDictionnary.addTag((ArrayList<Image>) imageListV);
+
+        Iterator it = imageListV.iterator();
+        ArrayList<Image> temp = new ArrayList<>();
+
+        while(it.hasNext()){
+            Image image = (Image) it.next();
+            if(temp.contains(image)){
+                it.remove();
+                temp.remove(image);
+                continue;
+            }
+            ArrayList<Image> images = getImage(image.getTags(), (ArrayList<Image>) ((ArrayList<Image>) imageListV).clone());
+            Slide slide = new Slide();
+            slide.add(image);
+            Random rand = new Random();
+            int index = rand.nextInt(images.size()>1?images.size()-1:1);
+            Image imageTemp = images.get(index);
+            temp.add(imageTemp);
+            slide.add(imageTemp);
+            slides.add(slide);
+            it.remove();
+
+        }
+/*
+        for(int i=0; i<length; i+=2){
+
             Image[] images = new Image[2];
             images[0] = imageListV.get(i);
             images[1] = imageListV.get(i+1);
@@ -57,13 +83,24 @@ public class Runner {
             slide.add(images[0]);
             slide.add(images[1]);
             slides.add(slide);
-        }
+        }*/
         Collections.shuffle(imageListH);
         for(Image image : imageListH){
             Slide slide = new Slide();
             slide.add(image);
             slides.add(slide);
         }
+    }
+
+    public static ArrayList<Image> getImage(String[] tags, ArrayList<Image> images){
+        for(String tag : tags){
+            images.removeAll(tagDictionnary.tag_dict_image.get(tag));
+            if(images.size()==0) {
+                System.out.println(tagDictionnary.tag_dict_image.get(tag));
+                return tagDictionnary.tag_dict_image.get(tag);
+            }
+        }
+        return images;
     }
     private static void printListImage() {
         for(Image image : imageListV)

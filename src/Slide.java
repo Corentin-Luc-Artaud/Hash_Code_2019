@@ -9,11 +9,11 @@ public class Slide {
 
     }
 
-    public List<String> getTags(){
+    public List<String> getTags() {
         List<String> tags = new ArrayList<String>();
 
 
-        for (Image image:images){
+        for (Image image : images) {
             tags.addAll(Arrays.asList(image.getTags()));
 
         }
@@ -36,13 +36,6 @@ public class Slide {
         return images;
     }
 
-    public List<String> getTags() {
-        List<String> tags = new ArrayList<String>();
-        for (Image image : images) {
-            tags.addAll(Arrays.asList(image.getTags()));
-        }
-        return tags;
-    }
 
     @Override
     public String toString() {
@@ -76,13 +69,14 @@ public class Slide {
         int smallest = Math.min(otherprivatemy.size(), Math.min(myprivateother.size(), intersection.size()));
         return smallest;
     }
-    boolean candidate(Slide o){
+
+    boolean candidate(Slide o) {
         Set<String> myTags = new HashSet<>(this.getTags());
         Set<String> otherTags = new HashSet<>(o.getTags());
 
         Set<String> intersection = new HashSet<>(myTags);
         intersection.retainAll(otherTags);
 
-        return intersection.size()>=1;
+        return intersection.size() >= 1;
     }
 }
