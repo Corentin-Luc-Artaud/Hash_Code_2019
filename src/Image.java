@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.Objects;
 
 public class Image {
     private int index;
@@ -40,4 +42,21 @@ public class Image {
        }
        return String.valueOf(stringBuilder);
    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Image image = (Image) o;
+        return index == image.index &&
+                Objects.equals(orientation, image.orientation) &&
+                Arrays.equals(tags, image.tags);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(index, orientation);
+        result = 31 * result + Arrays.hashCode(tags);
+        return result;
+    }
 }
