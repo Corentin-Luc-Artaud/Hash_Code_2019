@@ -6,18 +6,18 @@ import java.util.Scanner;
 public class ExampleParseur {
 
     private static int numberOfPhotos;
-    private static ArrayList<Image> imageList;
+    private static ArrayList<Image> imageListV;
+    private static ArrayList<Image> imageListH;
 
     public ExampleParseur(String path){
-        imageList = new ArrayList<>();
+        imageListV = new ArrayList<>();
+        imageListH = new ArrayList<>();
         try {
             readFile(path);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for(Image image : imageList){
-            System.out.println(image);
-        }
+
     }
 
     static void readFile(String path) throws IOException {
@@ -39,7 +39,11 @@ public class ExampleParseur {
                     photosTags[i] = photoParameters[i+2];
                 }
                 Image image = new Image(index,photoParameters[0],photosTags);
-                imageList.add(image);
+
+                if(image.getOrientation().equals("H"))
+                    imageListH.add(image);
+                else
+                    imageListV.add(image);
                 index++;
             }
             // note that Scanner suppresses exceptions
@@ -64,7 +68,10 @@ public class ExampleParseur {
         return numberOfPhotos;
     }
 
-    public ArrayList<Image> getImageList() {
-        return imageList;
+    public ArrayList<Image> getImageListH() {
+        return imageListH;
+    }
+    public ArrayList<Image> getImageListV() {
+        return imageListV;
     }
 }
