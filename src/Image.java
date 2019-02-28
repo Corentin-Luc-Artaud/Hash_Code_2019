@@ -30,4 +30,14 @@ public class Image {
        return tags;
    }
 
+   @Override
+   public String toString(){
+       StringBuilder stringBuilder = new StringBuilder();
+       stringBuilder.append("Index : ").append(this.index).append(" Orientation : ").append(this.orientation);
+       stringBuilder.append(" Tags : ");
+       for(int i=0;i<tags.length;i++){
+           stringBuilder.append(tags[i]+' ');
+       }
+       return String.valueOf(stringBuilder);
+   }
 }
