@@ -9,7 +9,7 @@ public class Slide {
         boolean allowMulti = true;
         for (int i = 0; i < this.images.length; ++i) {
             if (i == 0 && images[i].getOrientation() == "V") allowMulti = false;
-            if (i > 0 && ! allow) throw new RuntimeException("bad Images list -> "+images);
+            if (i > 0 && ! allowMulti) throw new RuntimeException("bad Images list -> "+images);
         }
     }
 
