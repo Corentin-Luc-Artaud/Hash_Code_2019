@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Runner {
@@ -23,10 +24,11 @@ public class Runner {
                 ExampleParseur exampleParseur = new ExampleParseur(file);
                 imageListH = exampleParseur.getImageListH();
                 imageListV = exampleParseur.getImageListV();
-                RandomAlgo randomAlgo = new RandomAlgo(slides);
                 creationSlide();
+                RandomAlgo randomAlgo = new RandomAlgo(slides);
                 List<Slide> result = randomAlgo.process();
                 new Output(result.size(),result,file);
+                slides = new ArrayList<>();
             }
         }
         else {
@@ -36,7 +38,7 @@ public class Runner {
             creationSlide();
             RandomAlgo randomAlgo = new RandomAlgo(slides);
             List<Slide> result = randomAlgo.process();
-           // new Output(result.size(),result,args[0].split("/")[1]);
+            new Output(result.size(),result,args[0].split("/")[1]);
         }
 
     }
@@ -46,7 +48,8 @@ public class Runner {
         if(imageListV.size()%2==0){
             length = imageListV.size();
         }
-        for(int i=0; i<length; i+=2){
+        Collections.shuffle(imageListV);
+        for(int i=0; i<length-1; i+=2){
             Image[] images = new Image[2];
             images[0] = imageListV.get(i);
             images[1] = imageListV.get(i+1);
@@ -55,6 +58,7 @@ public class Runner {
             slide.add(images[1]);
             slides.add(slide);
         }
+        Collections.shuffle(imageListH);
         for(Image image : imageListH){
             Slide slide = new Slide();
             slide.add(image);
