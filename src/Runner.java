@@ -3,7 +3,10 @@ import java.util.List;
 
 public class Runner {
 
+    public static ArrayList<Image> imageListV;
+    public static ArrayList<Image> imageListH;
     public static void main(String... args){
+
         if(args[0].equals("ALL")){
             String[] allFiles = new String[5];
             allFiles[0]= "inputs/a_example.txt";
@@ -24,6 +27,18 @@ public class Runner {
             List<Slide> result = randomAlgo.process();
             new Output(result.size(),result);
         }
+        ExampleParseur exampleParseur = new ExampleParseur(args[0]);
+        imageListH = exampleParseur.getImageListH();
+        imageListV = exampleParseur.getImageListV();
+    }
 
+
+
+
+    private static void printListImage() {
+        for(Image image : imageListV)
+            System.out.println(image);
+        for(Image image : imageListH)
+            System.out.println(image);
     }
 }
