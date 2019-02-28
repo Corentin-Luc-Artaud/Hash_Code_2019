@@ -25,7 +25,7 @@ public class Runner {
                 imageListH = exampleParseur.getImageListH();
                 imageListV = exampleParseur.getImageListV();
                 creationSlide();
-                RandomAlgo randomAlgo = new RandomAlgo(slides);
+                AlgoBetter randomAlgo = new AlgoBetter(slides);
                 List<Slide> result = randomAlgo.process();
                 new Output(result.size(),result,file);
                 slides = new ArrayList<>();
@@ -36,7 +36,7 @@ public class Runner {
             imageListH = exampleParseur.getImageListH();
             imageListV = exampleParseur.getImageListV();
             creationSlide();
-            RandomAlgo randomAlgo = new RandomAlgo(slides);
+            AlgoBetter randomAlgo = new AlgoBetter(slides);
             List<Slide> result = randomAlgo.process();
             new Output(result.size(),result,args[0].split("/")[1]);
         }
@@ -65,7 +65,6 @@ public class Runner {
             slides.add(slide);
         }
     }
-
     private static void printListImage() {
         for(Image image : imageListV)
             System.out.println(image);
