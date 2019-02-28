@@ -12,6 +12,7 @@ public class ExampleParseur {
     public ExampleParseur(String path){
         imageListV = new ArrayList<>();
         imageListH = new ArrayList<>();
+
         try {
             readFile(path);
         } catch (IOException e) {

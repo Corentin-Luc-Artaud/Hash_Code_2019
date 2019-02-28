@@ -30,10 +30,6 @@ public class Output {
 
       //=================
 
-
-
-
-
       for (int j = 0; j < number_slides; j++) {
         //Slide side = pizzaCutter.cutSlices.get(j);
         // Get tags and orientation
